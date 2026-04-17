@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>W.O.M.B.A.T. 巫师职业倾向测试</title>
+  <meta name="description" content="进入魔法部职业考核，完成 36 道问答，解锁你的巫师职业档案。">
+  <link rel="stylesheet" href="./assets/styles/main.css">
+</head>
+<body>
+  <div class="background-orb orb-one"></div>
+  <div class="background-orb orb-two"></div>
+  <div class="background-orb orb-three"></div>
+
+  <div class="site-shell">
+    <header class="topbar">
+      <div>
+        <p class="topbar-eyebrow">W.O.M.B.A.T.</p>
+        <h1 class="topbar-title">巫师职业倾向测试档案库</h1>
+      </div>
+      <div class="topbar-meta">
+        <span id="topbar-user-label">未签名</span>
+        <span class="topbar-divider"></span>
+        <span id="topbar-mode-label">正式模式</span>
+      </div>
+    </header>
+
+    <main class="view-stack">
+      <section id="view-entrance" class="view-panel is-active">
+        <div class="hero-grid">
+          <article class="magic-card entrance-card">
+            <p class="section-kicker">魔法契约签名</p>
+            <h2 class="hero-title">签署你的职业考核准入卷轴</h2>
+            <p class="hero-text">
+              这是一次以魔法部档案标准整理的职业倾向测试。你将完成 36 道世界观题目，得到九维潜力画像，并在结果页解锁属于你的巫师职业经历。
+            </p>
+
+            <form id="entrance-form" class="entrance-form">
+              <label class="field">
+                <span class="field-label">考生姓名或代号</span>
+                <input id="candidate-name" name="candidateName" class="field-input" type="text" maxlength="24" placeholder="例如：Aurora Finch">
+              </label>
+
+              <fieldset class="mode-fieldset">
+                <legend class="field-label">档案模式</legend>
+                <label class="mode-option">
+                  <input type="radio" name="resultMode" value="formal" checked>
+                  <span>
+                    <strong>正式模式</strong>
+                    <small>屏蔽黑暗阵营结果，仅显示常规职业</small>
+                  </span>
+                </label>
+                <label class="mode-option">
+                  <input type="radio" name="resultMode" value="entertainment">
+                  <span>
+                    <strong>娱乐模式</strong>
+                    <small>开放黑暗叙事结果位，保留故事化输出</small>
+                  </span>
+                </label>
+              </fieldset>
+
+              <div class="button-row">
+                <button type="submit" class="btn-ministry">开始考核</button>
+                <button id="resume-button" type="button" class="btn-secondary is-hidden">继续上次进度</button>
+                <button id="clear-storage-button" type="button" class="btn-ghost is-hidden">清除存档</button>
+              </div>
+            </form>
+          </article>
+
+          <aside class="magic-card side-card">
+            <p class="section-kicker">考核路径</p>
+            <ol class="route-list">
+              <li>
+                <strong>第一阶段</strong>
+                <span>契约签名与身份确认</span>
+              </li>
+              <li>
+                <strong>第二阶段</strong>
+                <span>冥想盆式 36 题职业问答</span>
+              </li>
+              <li>
+                <strong>第三阶段</strong>
+                <span>九维画像与职业匹配演算</span>
+              </li>
+              <li>
+                <strong>第四阶段</strong>
+                <span>魔法部个人档案解密</span>
+              </li>
+            </ol>
+
+            <div class="fact-panel">
+              <p class="fact-label">本次考核将输出</p>
+              <ul class="fact-list">
+                <li>主职业结果与前三职业排序</li>
+                <li>九维潜力雷达图</li>
+                <li>匹配原因与相邻职业差异</li>
+                <li>完整职业背景与沉浸式经历叙事</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="view-testing" class="view-panel">
+        <article class="magic-card testing-card">
+          <div class="progress-rail">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+
+          <div class="testing-meta">
+            <div>
+              <p class="section-kicker">魔法部职业考核室</p>
+              <h2 class="testing-phase" id="phase-label">第一阶段</h2>
+            </div>
+            <div class="testing-counts">
+              <span id="question-counter">第 1 / 36 题</span>
+              <span id="phase-counter">阶段 1 / 4</span>
+            </div>
+          </div>
+
+          <div class="question-shell">
+            <h3 id="question-text" class="question-text"></h3>
+            <p id="dimension-hint" class="dimension-hint"></p>
+          </div>
+
+          <div id="answer-options" class="option-stack" role="radiogroup" aria-label="题目选项"></div>
+
+          <div class="testing-footer">
+            <button id="quit-button" class="btn-ghost" type="button">返回首页</button>
+            <div class="footer-actions">
+              <button id="prev-button" class="btn-secondary" type="button">上一题</button>
+              <button id="next-button" class="btn-ministry" type="button">下一题</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="view-result" class="view-panel">
+        <article class="result-header magic-card">
+          <p class="section-kicker">魔法部档案解密</p>
+          <div class="result-header-grid">
+            <div>
+              <p id="result-nameplate" class="result-nameplate"></p>
+              <h2 id="result-career-title" class="result-career-title"></h2>
+              <p id="result-career-subtitle" class="result-career-subtitle"></p>
+            </div>
+            <div class="badge-block">
+              <div id="career-badge" class="career-badge"></div>
+              <div>
+                <div id="result-match-score" class="match-score"></div>
+                <div class="match-label">灵魂共鸣度</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="result-grid">
+          <article class="magic-card result-card">
+            <h3 class="card-title">九维潜力图谱</h3>
+            <div id="radar-chart" class="chart-container"></div>
+            <div id="dimension-summary" class="dimension-summary"></div>
+          </article>
+
+          <article class="magic-card result-card">
+            <h3 class="card-title">职业图谱 Top 3</h3>
+            <div id="top-careers-list" class="top-careers-list"></div>
+            <div class="small-note">
+              点击任一职业卡片，可以切换下方的完整档案叙事。
+            </div>
+          </article>
+
+          <article class="magic-card result-card result-card-wide">
+            <h3 class="card-title">职业匹配说明</h3>
+            <div id="match-explanation" class="explanation-list"></div>
+          </article>
+
+          <article class="magic-card result-card result-card-wide">
+            <h3 class="card-title">职业档案</h3>
+            <div id="career-dossier" class="dossier-layout"></div>
+          </article>
+        </div>
+
+        <div class="result-actions">
+          <button id="restart-button" class="btn-secondary" type="button">重新测试</button>
+          <button id="back-home-button" class="btn-ghost" type="button">返回首页</button>
+        </div>
+
+        <details class="logic-details magic-card">
+          <summary>查看评分逻辑说明</summary>
+          <div id="logic-summary" class="logic-summary"></div>
+        </details>
+      </section>
+    </main>
+  </div>
+
+  <div id="password-overlay" class="password-overlay is-hidden" aria-hidden="true">
+    <div class="password-backdrop"></div>
+    <section class="password-dialog magic-card" role="dialog" aria-modal="true" aria-labelledby="password-title">
+      <p class="section-kicker">魔法部访问锁</p>
+      <h2 id="password-title" class="password-title">请输入档案访问口令</h2>
+      <p id="password-description" class="password-description">
+        当前档案已进入受限状态。只有通过魔法部访问验证，才能继续进入职业考核或查看既有结果。
+      </p>
+
+      <div class="lock-crest-row">
+        <div class="lock-crest">MO</div>
+        <div class="lock-meta">
+          <strong>魔法法律执行司</strong>
+          <span>Restricted Archive Access</span>
+        </div>
+      </div>
+
+      <label class="field">
+        <span class="field-label">访问口令</span>
+        <input id="password-input" class="field-input password-input" type="password" autocomplete="off" placeholder="输入魔法部口令">
+      </label>
+
+      <p id="password-error" class="password-error is-hidden">口令错误，档案仍处于封锁状态。</p>
+
+      <div class="button-row">
+        <button id="password-confirm-button" type="button" class="btn-ministry">验证口令</button>
+        <button id="password-cancel-button" type="button" class="btn-secondary">取消</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="./src/data/questions.js"></script>
+  <script src="./src/data/careers.js"></script>
+  <script src="./src/utils/storage.js"></script>
+  <script src="./src/utils/scoring.js"></script>
+  <script src="./src/utils/charts.js"></script>
+  <script src="./src/app.js"></script>
+</body>
+</html>
