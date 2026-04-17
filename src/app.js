@@ -191,6 +191,22 @@ function handleRestart() {
   renderApp();
 }
 
+function commitAnswer(questionId, value) {
+  state.answers[questionId] = value;
+
+  if (state.currentIndex === questions.length - 1) {
+    state.stage = "result";
+    state.selectedCareerId = null;
+    persistState();
+    renderApp();
+    return;
+  }
+
+  state.currentIndex += 1;
+  persistState();
+  renderApp();
+}
+
 function persistState() {
   saveStoredState({
     name: state.name,
@@ -263,9 +279,7 @@ function renderQuestion() {
       </span>
     `;
     button.addEventListener("click", () => {
-      state.answers[question.id] = option.value;
-      persistState();
-      renderQuestion();
+      commitAnswer(question.id, option.value);
     });
     refs.answerOptions.appendChild(button);
   });
